@@ -1,0 +1,17 @@
+div {
+    height: 400px;
+    width: 35%;
+    background-color: rgb(190, 190, 190);
+    position: relative;
+}
+
+#div0 {
+    float: left;
+    margin-left: 10%;
+    
+}
+
+#div1 {
+    float: right;
+    margin-right: 10%;
+}
