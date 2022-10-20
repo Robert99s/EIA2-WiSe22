@@ -2,7 +2,6 @@ var A02_EventInspector;
 (function (A02_EventInspector) {
     window.addEventListener("load", handleLoad);
     function handleLoad() {
-        console.log("Spast");
         document.addEventListener("mousemove", SetInfoBox);
         document.addEventListener("keyup", LogInfo);
         document.addEventListener("click", LogInfo);
@@ -12,11 +11,11 @@ var A02_EventInspector;
         document.querySelector("div").addEventListener("click", LogInfo);
     }
     function SetInfoBox(_event) {
+        let span = document.querySelector("span");
         let x = _event.screenX;
         let y = _event.screenY;
         document.querySelector("#mouseText").textContent = "x-Achse:" + x.toString() + " y-Achse:" + y.toString() + " EventTarget:" + _event.target;
-        document.querySelector("span");
-        x.toString() + "px";
+        document.querySelector("span").setAttribute("style", "left: " + x.toString() + "px; top: " + y.toString() + "px; display: " + "block");
     }
     function LogInfo(_event) {
         console.log(_event.type);

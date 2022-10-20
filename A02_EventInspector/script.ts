@@ -2,7 +2,6 @@ namespace A02_EventInspector {
     window.addEventListener("load", handleLoad);
     
     function handleLoad(): void {
-        console.log("Spast");
         
         document.addEventListener("mousemove", SetInfoBox);
         document.addEventListener("keyup", LogInfo);
@@ -15,13 +14,13 @@ namespace A02_EventInspector {
 
     function SetInfoBox (_event: MouseEvent): void {
 
+        let span: HTMLSpanElement = document.querySelector("span");
         let x: Number = _event.screenX;
         let y: Number = _event.screenY;
         
         document.querySelector("#mouseText").textContent = "x-Achse:" + x.toString() + " y-Achse:" + y.toString() + " EventTarget:" + _event.target;
 
-        document.querySelector("span")x.toString() + "px";
-
+        document.querySelector("span").setAttribute("style", "left: " + x.toString() + "px; top: " + y.toString() + "px; display: " + "block");
     }
 
     function LogInfo (_event: Event): void {
