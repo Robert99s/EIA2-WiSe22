@@ -26,7 +26,18 @@ div {
 }
 
 button {
-    background-color: yellow;
+    background-color: red;
     height: 50px;
     width: 50px;
+    margin-left: 45%;
+    margin-right: 45%;
+    margin-top: 45%;
+    margin-bottom: 45%;
+    position: absolute;
+    border: none;
+    border-radius: 50px;
+}
+
+button:hover {
+    scale: 1.1;
 }

@@ -1,3 +1,10 @@
+/*
+A02 EventInspector
+Robert Schindler MKB
+271342
+Quellen: Jonas Atzenhofer
+*/
+
 namespace A02_EventInspector {
     window.addEventListener("load", handleLoad);
     
@@ -10,6 +17,8 @@ namespace A02_EventInspector {
         document.querySelector("body").addEventListener("click", LogInfo);
         document.querySelector("div").addEventListener("keyup", LogInfo);
         document.querySelector("div").addEventListener("click", LogInfo);
+        document.querySelector("button").addEventListener("click", customEvent);
+        document.addEventListener("customEvent", logCustomEvent);
     }
 
     function SetInfoBox (_event: MouseEvent): void {
@@ -28,8 +37,17 @@ namespace A02_EventInspector {
         console.log(_event.target);
         console.log(_event.currentTarget);
         console.log(_event);
+        // Im Nachgang erfahren, das ein console.log für LogInfo ausgereicht hätte.
+    }
+ 
+    function customEvent(_event: MouseEvent): void {
+        let event: CustomEvent = new CustomEvent("customEvent", {bubbles: true});
+        let button: HTMLElement = <HTMLElement>document.querySelector("button");
+
     }
 
-// Im Nachgang erfahren, das ein console.log für LogInfo ausgereicht hätte.
-    
+    function logCustomEvent(_event: Event): void {
+        console.log(_event);
+        
+    }
 }

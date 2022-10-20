@@ -1,3 +1,9 @@
+/*
+A02 EventInspector
+Robert Schindler MKB
+271342
+Quellen: Jonas Atzenhofer
+*/
 var A02_EventInspector;
 (function (A02_EventInspector) {
     window.addEventListener("load", handleLoad);
@@ -9,6 +15,8 @@ var A02_EventInspector;
         document.querySelector("body").addEventListener("click", LogInfo);
         document.querySelector("div").addEventListener("keyup", LogInfo);
         document.querySelector("div").addEventListener("click", LogInfo);
+        document.querySelector("button").addEventListener("click", customEvent);
+        document.addEventListener("customEvent", logCustomEvent);
     }
     function SetInfoBox(_event) {
         let span = document.querySelector("span");
@@ -22,7 +30,14 @@ var A02_EventInspector;
         console.log(_event.target);
         console.log(_event.currentTarget);
         console.log(_event);
+        // Im Nachgang erfahren, das ein console.log für LogInfo ausgereicht hätte.
     }
-    // Im Nachgang erfahren, das ein console.log für LogInfo ausgereicht hätte.
+    function customEvent(_event) {
+        let event = new CustomEvent("customEvent", { bubbles: true });
+        let button = document.querySelector("button");
+    }
+    function logCustomEvent(_event) {
+        console.log(_event);
+    }
 })(A02_EventInspector || (A02_EventInspector = {}));
 //# sourceMappingURL=script.js.map
