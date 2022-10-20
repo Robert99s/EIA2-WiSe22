@@ -12,7 +12,7 @@ namespace RandomPoem {
     let objects: String [] = ["Zaubertränke", "den Grimm", "Lupin", "Hogwarts", "die Karte des Rumtreibers", "Dementoren"];
 
     for (let index: number = 7; index >= 1; index--) {
-        console.log(getVerse(subjects, predicates, objects));
+    //    console.log(getVerse(subjects, predicates, objects));
     }
     // Im Nachgang bemerkt, dass durch index = 7 in der Konsole "undefined undefined undefined" steht, da alle Wörter durch splice verschwunden sind und die Schleife noch einmal durchläuft.
         
@@ -24,9 +24,9 @@ namespace RandomPoem {
             let objectsNumber: number = Math.floor(Math.random() * _objects.length);
                      
             verse = _subjects[subjectsNumber] + " " + _predicates[predicatesNumber] + " " + _objects[objectsNumber];
-            _subjects.splice(subjectsNumber, 1);
-            _predicates.splice(predicatesNumber, 1);
-            _objects.splice(objectsNumber, 1);
+           // _subjects.splice(subjectsNumber, 1);
+           // _predicates.splice(predicatesNumber, 1);
+           // _objects.splice(objectsNumber, 1);
             return verse;
         }
 }
