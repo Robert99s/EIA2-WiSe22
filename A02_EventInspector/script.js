@@ -12,7 +12,11 @@ var A02_EventInspector;
         document.querySelector("div").addEventListener("click", LogInfo);
     }
     function SetInfoBox(_event) {
-        document.querySelector("#mouseText").textContent = "Okay";
+        let x = _event.screenX;
+        let y = _event.screenY;
+        document.querySelector("#mouseText").textContent = "x-Achse:" + x.toString() + " y-Achse:" + y.toString() + " EventTarget:" + _event.target;
+        document.querySelector("span");
+        x.toString() + "px";
     }
     function LogInfo(_event) {
         console.log(_event.type);
@@ -20,5 +24,6 @@ var A02_EventInspector;
         console.log(_event.currentTarget);
         console.log(_event);
     }
+    // Im Nachgang erfahren, das ein console.log für LogInfo ausgereicht hätte.
 })(A02_EventInspector || (A02_EventInspector = {}));
 //# sourceMappingURL=script.js.map
