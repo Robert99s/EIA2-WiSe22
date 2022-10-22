@@ -1,8 +1,9 @@
 /*
 A02 EventInspector
 Robert Schindler MKB
-271342
-Quellen: Jonas Atzenhofer
+Matrikel: 271342
+Datum: 22.10.2022
+Quellen: Gemeinsam mit Jonas Atzenhofer erarbeitet
 */
 var A02_EventInspector;
 (function (A02_EventInspector) {
@@ -22,7 +23,7 @@ var A02_EventInspector;
         let span = document.querySelector("span");
         let x = _event.screenX;
         let y = _event.screenY;
-        document.querySelector("#mouseText").textContent = "x-Achse:" + x.toString() + " y-Achse:" + y.toString() + " EventTarget:" + _event.target;
+        document.querySelector("#mouseText").textContent = "x:" + x.toString() + " y:" + y.toString() + " EventTarget:" + _event.target;
         document.querySelector("span").setAttribute("style", "left: " + x.toString() + "px; top: " + y.toString() + "px; display: " + "block");
     }
     function LogInfo(_event) {

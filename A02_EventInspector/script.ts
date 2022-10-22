@@ -1,8 +1,9 @@
 /*
 A02 EventInspector
 Robert Schindler MKB
-271342
-Quellen: Jonas Atzenhofer
+Matrikel: 271342
+Datum: 22.10.2022
+Quellen: Gemeinsam mit Jonas Atzenhofer erarbeitet
 */
 
 namespace A02_EventInspector {
@@ -27,7 +28,7 @@ namespace A02_EventInspector {
         let x: Number = _event.screenX;
         let y: Number = _event.screenY;
         
-        document.querySelector("#mouseText").textContent = "x-Achse:" + x.toString() + " y-Achse:" + y.toString() + " EventTarget:" + _event.target;
+        document.querySelector("#mouseText").textContent = "x:" + x.toString() + " y:" + y.toString() + " EventTarget:" + _event.target;
 
         document.querySelector("span").setAttribute("style", "left: " + x.toString() + "px; top: " + y.toString() + "px; display: " + "block");
     }

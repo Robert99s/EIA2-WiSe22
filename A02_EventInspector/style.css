@@ -19,7 +19,7 @@ div {
 #mouseText {
     position: fixed;
     z-index: 3;
-    height: 50px;
+    height: 40px;
     width: 200px;
     background-color: skyblue;
     display: none;
