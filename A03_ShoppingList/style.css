@@ -14,14 +14,26 @@ h2 {
     text-align: center;
 }
 
-div { background-color: grey;
+#addToList {
+    background-color: grey;
     height: 3em;
     width: 80%;
-    margin-left: 10%;
-    margin-right: 10%;
-    border: 0.3em;
+    border: 0.2em;
     border-color: rgb(255, 255, 255);
     border-style: outset;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+#shoppingList {
+    background-color: grey;
+    height: 30em;
+    width: 80%;
+    border: 0.2em;
+    border-color: rgb(255, 255, 255);
+    border-style: outset;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
 .textField {
@@ -32,6 +44,11 @@ div { background-color: grey;
     border: 0.1em;
     border-color: rgb(255, 255, 255);
     border-style: solid;
+    border-radius: 0.5em;
+}
+
+.textField::placeholder {
+    color: white;
 }
 
 #addButton {
@@ -43,4 +60,41 @@ div { background-color: grey;
     border-color: white;
     border-style: solid;
     margin-left: 0.5em;
+}
+
+#addButton:hover {
+    scale: 1.1;
+    color: black;
+}
+
+.itemInfo {
+    height: 3em;
+    border: 0.3em;
+    border-style: solid;
+    border-color: black;
+    background-color: skyblue;
+}
+
+#bought {
+    margin-left: 7%;
+}
+
+span {
+    margin-left: 7%;
+    margin-right: 7%;
+}
+
+Button {
+    background-color: white;
+    color: skyblue;
+    border: 0.1em;
+    border-color: black;
+    border-style: solid;
+    border-radius: 0.3em;
+    height: 3.7em;
+    width: 5em;
+}
+
+Button:hover {
+    scale: 1.1;
 }
