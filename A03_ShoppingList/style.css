@@ -17,29 +17,30 @@ h2 {
 #addToList {
     background-color: grey;
     height: 3em;
-    width: 80%;
+    width: 85%;
     border: 0.2em;
     border-color: rgb(255, 255, 255);
     border-style: outset;
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-left: 7.5%;
+    margin-right: 7.5%;
+    text-align: center;
 }
 
 #shoppingList {
     background-color: grey;
     height: 30em;
-    width: 80%;
+    width: 85%;
     border: 0.2em;
     border-color: rgb(255, 255, 255);
     border-style: outset;
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-left: 7.5%;
+    margin-right: 7.5%;
 }
 
 .textField {
     background-color: skyblue;
     height: 3em;
-    width: 30%;
+    width: 26%;
     margin-top: 0.1em;
     border: 0.1em;
     border-color: rgb(255, 255, 255);
@@ -53,13 +54,12 @@ h2 {
 
 #addButton {
     height: 3em;
-    width: 6%;
+    width: 11%;
     background-color: skyblue;
     color: white;
     border: 0.1em;
     border-color: white;
     border-style: solid;
-    margin-left: 0.5em;
 }
 
 #addButton:hover {
@@ -68,20 +68,12 @@ h2 {
 }
 
 .itemInfo {
-    height: 3em;
+    height: 2.5em;
     border: 0.3em;
     border-style: solid;
     border-color: black;
     background-color: skyblue;
-}
-
-#bought {
-    margin-left: 7%;
-}
-
-span {
-    margin-left: 7%;
-    margin-right: 7%;
+    text-align: center;
 }
 
 Button {
@@ -91,8 +83,8 @@ Button {
     border-color: black;
     border-style: solid;
     border-radius: 0.3em;
-    height: 3.7em;
-    width: 5em;
+    height: 3em;
+    width: 11%;
 }
 
 Button:hover {
