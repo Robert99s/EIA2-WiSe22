@@ -1,9 +1,9 @@
 /*
-A02 ShoppingList
+A03 ShoppingList
 Robert Schindler MKB
 Matrikel: 271342
 Datum: 29.10.2022
-Quellen: Gemeinsam mit Jonas Atzenhofer und Yannik König erarbeitet
+Quellen: Jonas Atzenhofer und Yannik König
 */
 var A03_ShoppingList;
 (function (A03_ShoppingList) {
