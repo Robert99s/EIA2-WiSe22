@@ -5,31 +5,26 @@ Matrikel: 271342
 Datum: 29.10.2022
 Quellen: Gemeinsam mit Jonas Atzenhofer und Yannik König erarbeitet
 */
-
-namespace A03_ShoppingList {
+var A03_ShoppingList;
+(function (A03_ShoppingList) {
     window.addEventListener("load", handleLoad);
-    
-    function handleLoad(): void {
+    function handleLoad() {
         document.querySelector("#addButton").addEventListener("click", addItem);
         document.querySelector("#bought").addEventListener("click", itemBought);
         document.querySelector("#editButton").addEventListener("click", editItem);
         document.querySelector("#deleteButton").addEventListener("click", deleteItem);
     }
-
-    function addItem(): void {
-        console.log("Item zur Liste hinzügen"); 
+    function addItem() {
+        console.log("Item zur Liste hinzügen");
     }
-
-    function itemBought(): void {
-        console.log("Item gekauft");   
+    function itemBought() {
+        console.log("Item gekauft");
     }
-
-    function editItem(): void {
+    function editItem() {
         console.log("Item editieren");
     }
-
-    function deleteItem(): void {
+    function deleteItem() {
         console.log("Item löschen");
-        
     }
-}
+})(A03_ShoppingList || (A03_ShoppingList = {}));
+//# sourceMappingURL=script.js.map
