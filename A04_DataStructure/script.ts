@@ -1,12 +1,12 @@
 /*
-A03 ShoppingList
+A04 DataStructure
 Robert Schindler MKB
 Matrikel: 271342
 Datum: 29.10.2022
 Quellen: Jonas Atzenhofer und Yannik König
 */
 
-namespace A03_ShoppingList {
+namespace A04_DataStructure {
     window.addEventListener("load", handleLoad);
     
     function handleLoad(): void {
@@ -36,7 +36,7 @@ namespace A03_ShoppingList {
     }
 
     function itemBought(): void {
-        console.log("Item gekauft");   
+        console.log(data);   
     }
 
     function editItem(): void {

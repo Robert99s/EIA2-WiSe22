@@ -1,12 +1,12 @@
 /*
-A03 ShoppingList
+A04 DataStructure
 Robert Schindler MKB
 Matrikel: 271342
 Datum: 29.10.2022
 Quellen: Jonas Atzenhofer und Yannik König
 */
-var A03_ShoppingList;
-(function (A03_ShoppingList) {
+var A04_DataStructure;
+(function (A04_DataStructure) {
     window.addEventListener("load", handleLoad);
     function handleLoad() {
         document.querySelector("#item").addEventListener("keydown", itemName);
@@ -30,7 +30,7 @@ var A03_ShoppingList;
         console.log("Item zur Liste hinzügen");
     }
     function itemBought() {
-        console.log("Item gekauft");
+        console.log(A04_DataStructure.data);
     }
     function editItem() {
         console.log("Item editieren");
@@ -38,5 +38,5 @@ var A03_ShoppingList;
     function deleteItem() {
         console.log("Item löschen");
     }
-})(A03_ShoppingList || (A03_ShoppingList = {}));
+})(A04_DataStructure || (A04_DataStructure = {}));
 //# sourceMappingURL=script.js.map
