@@ -1,0 +1,97 @@
+body {
+    height: 100%;
+    width: 100%;
+    background-color: black;
+}
+
+h1 {
+    color: skyblue;
+    text-align: center;
+}
+
+h2 {
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+
+#addToList {
+    background-color: grey;
+    height: 3em;
+    width: 85%;
+    border: 0.2em;
+    border-color: rgb(255, 255, 255);
+    border-style: outset;
+    margin-left: 7.5%;
+    margin-right: 7.5%;
+    text-align: center;
+}
+
+#shoppingList {
+    background-color: grey;
+    height: 30em;
+    width: 85%;
+    border: 0.2em;
+    border-color: rgb(255, 255, 255);
+    border-style: outset;
+    margin-left: 7.5%;
+    margin-right: 7.5%;
+}
+
+.textField {
+    background-color: skyblue;
+    height: 3em;
+    width: 26%;
+    margin-top: 0.1em;
+    border: 0.1em;
+    border-color: rgb(255, 255, 255);
+    border-style: solid;
+    border-radius: 0.5em;
+}
+
+.textField::placeholder {
+    color: white;
+}
+
+#addButton {
+    height: 3em;
+    width: 11%;
+    background-color: skyblue;
+    color: white;
+    border: 0.1em;
+    border-color: white;
+    border-style: solid;
+}
+
+#addButton:hover {
+    scale: 1.1;
+    color: black;
+}
+
+.itemInfo {
+    height: 2.5em;
+    border: 0.3em;
+    border-style: solid;
+    border-color: black;
+    background-color: skyblue;
+    text-align: center;
+}
+
+Button {
+    background-color: white;
+    color: skyblue;
+    border: 0.1em;
+    border-color: black;
+    border-style: solid;
+    border-radius: 0.3em;
+    height: 3em;
+    width: 11%;
+}
+
+Button:hover {
+    scale: 1.1;
+}
+
+a {
+    position: absolute;
+    margin-top: 0%;
+}
