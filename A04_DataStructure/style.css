@@ -14,27 +14,28 @@ h2 {
     text-align: center;
 }
 
+#fieldset {
+    border: none;
+}
+
 #addToList {
     background-color: grey;
-    height: 3em;
-    width: 85%;
+    height: 100%;
+    width: 99%;
     border: 0.2em;
     border-color: rgb(255, 255, 255);
     border-style: outset;
-    margin-left: 7.5%;
-    margin-right: 7.5%;
     text-align: center;
 }
 
 #shoppingList {
     background-color: grey;
     height: 30em;
-    width: 85%;
+    width: 100%;
     border: 0.2em;
     border-color: rgb(255, 255, 255);
     border-style: outset;
-    margin-left: 7.5%;
-    margin-right: 7.5%;
+    list-style: none;
 }
 
 .textField {
@@ -52,7 +53,7 @@ h2 {
     color: white;
 }
 
-#addButton {
+#add {
     height: 3em;
     width: 11%;
     background-color: skyblue;
@@ -62,36 +63,67 @@ h2 {
     border-style: solid;
 }
 
-#addButton:hover {
+#add:hover {
     scale: 1.1;
     color: black;
-}
-
-.itemInfo {
-    height: 2.5em;
-    border: 0.3em;
-    border-style: solid;
-    border-color: black;
-    background-color: skyblue;
-    text-align: center;
-}
-
-Button {
-    background-color: white;
-    color: skyblue;
-    border: 0.1em;
-    border-color: black;
-    border-style: solid;
-    border-radius: 0.3em;
-    height: 3em;
-    width: 11%;
 }
 
 Button:hover {
     scale: 1.1;
 }
 
-a {
-    position: absolute;
-    margin-top: 0%;
+.lister {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    height: 5em;
+    width: 99%; 
+    min-width: 40em; 
+    border-style: solid;
+    border-color: black;
+    border-radius: 0.5em;
+}
+
+.bought {
+    height: 2em;
+    width: 2em;
+    margin: auto;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.ItemData {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.edit {
+    width: max-content;
+    margin: auto;
+    height: 2em;
+    margin-right: 2%;
+    background-color: white;
+    color: skyblue;
+    border: 0.1em;
+    border-color: black;
+    border-style: solid;
+    border-radius: 0.3em;
+}
+
+.delete {
+    background-color: white;
+    color: skyblue;
+    width: max-content;
+    margin: auto;
+    height: 2em;
+    margin-right: 1%;
+    border: 0.1em;
+    border-color: black;
+    border-style: solid;
+    border-radius: 0.3em;
 }

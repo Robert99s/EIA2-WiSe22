@@ -10,27 +10,19 @@
     <script src="./script.js"></script>
 </head>
 <body>
-    <a href="./IMG_2619.jpeg" target="_blank">Skizzen</a>
     <h1>Shopping List</h1>
-    <div id="addToList">
     <form>
-        <input id="item" class="textField" type="text" placeholder="ITEM">
-        <input id="amount" class="textField" type="number" placeholder="AMOUNT">
-        <input id="comment" class="textField" type="text" placeholder="COMMENT">
-        <button id="addButton"><b>+</b></button>
+        <div id="addToList">
+            <fieldset id="fieldset">
+        <input name="newItem" class="textField" type="text" placeholder="ITEM">
+        <input name="amount" class="textField" type="number" placeholder="AMOUNT">
+        <input name="comment" class="textField" type="text" placeholder="COMMENT">
+        <button id="add" type="button"><b>+</b></button>
+            </fieldset>
+        </div>
     </form>
-    </div>
+
     <h2>Overview</h2>
-    <div id="shoppingList">
-    <div class="itemInfo">
-        <input type="checkbox" name="" id="bought">
-        <span id="itemName">Milk</span>
-        <span id="amount">1</span>
-        <span id="comment">bottle</span>
-        <span id="date">29.10.2022</span>
-        <button id="editButton">Edit</button>
-        <button id="deleteButton">-</button>
-    <div>
-    </div>
+    <li id="shoppingList"></li>
 </body>
 </html>
