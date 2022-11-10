@@ -44,6 +44,7 @@ namespace A05_EinkaufslisteClient {
         divItemData.setAttribute("class", "ItemData");
         divItemData.setAttribute("id", "ItemData" + itemNumber); 
 
+        /*
         let newItemField: HTMLElement = document.createElement("p");
         divItemData.appendChild(newItemField);
         newItemField.setAttribute("class", "ItemDataFont");
@@ -62,7 +63,19 @@ namespace A05_EinkaufslisteClient {
         let dateField: HTMLElement = document.createElement("p");
         divItemData.appendChild(dateField);
         dateField.setAttribute("class", "ItemDataFont");
-        dateField.innerHTML = (date as string); 
+        dateField.innerHTML = (date as string);
+        */
+
+        /*
+        function addElement(_parent: HTMLElement, _content?: string): void {
+            let newButton: HTMLButtonElement = document.createElement("button");
+            _parent.appendChild(newItemField);
+            newItemField.setAttribute("class", "ItemDataFont");
+            if (_content) {
+                newItemField.innerHTML = (_content as string);
+            }
+        }
+        */
 
         let editButton: HTMLButtonElement = document.createElement("button");  
         newDiv.appendChild(editButton); 
