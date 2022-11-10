@@ -1,9 +1,9 @@
 
-{
+        {
         "1": [
             {
             "bought": true, 
-            "itemName": "Milch", 
+            "newItem": "Milch", 
             "amount": 1, 
             "comment": "Glasflasche", 
             "date": "03.11.2022"
