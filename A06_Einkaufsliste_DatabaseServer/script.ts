@@ -14,7 +14,6 @@ namespace A06_Einkaufsliste_DatabaseServer {
     let dateWithoutTime: string = date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear();
 
     let itemNumber: number = 0;
-    //let elementCounter: number = 0; wird für Bought benötigt
 
     window.addEventListener("load", handleLoad);
 
@@ -138,12 +137,12 @@ namespace A06_Einkaufsliste_DatabaseServer {
         query.set("data", JSON.stringify(json));
         let response: Response = await fetch(url + "?" + query.toString());
         let responseText: string = await response.text();
-        console.log();
+    
         if (responseText.includes("success")) {
-            alert("Item added!"); 
+            alert("Item hinzugefügt!"); 
         }
         else {
-            alert("Error! Try again!");
+            alert("Fehler");
             }
     }
 
@@ -314,10 +313,10 @@ namespace A06_Einkaufsliste_DatabaseServer {
         console.log(responseText); 
 
         if (responseText.includes("success")) {
-            alert("Item edited!"); 
+            alert("Item editiert"); 
         }
         else {
-            alert("Error! Try again!");
+            alert("Fehler");
                 }
     }
     
@@ -348,10 +347,10 @@ namespace A06_Einkaufsliste_DatabaseServer {
         let responseText: string = await response1.text();
 
         if (responseText.includes("success")) {
-            alert("Item deleted!"); 
+            alert("Item gelöscht"); 
         }
         else {
-            alert("Error! Try again!");
+            alert("Fehler");
                 }
     }
 }

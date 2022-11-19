@@ -11,7 +11,6 @@ var A06_Einkaufsliste_DatabaseServer;
     let date = new Date();
     let dateWithoutTime = date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear();
     let itemNumber = 0;
-    //let elementCounter: number = 0; wird für Bought benötigt
     window.addEventListener("load", handleLoad);
     async function handleLoad(_event) {
         let addButton = document.querySelector("button#add");
@@ -81,12 +80,11 @@ var A06_Einkaufsliste_DatabaseServer;
         query.set("data", JSON.stringify(json));
         let response = await fetch(url + "?" + query.toString());
         let responseText = await response.text();
-        console.log();
         if (responseText.includes("success")) {
-            alert("Item added!");
+            alert("Item hinzugefügt!");
         }
         else {
-            alert("Error! Try again!");
+            alert("Fehler");
         }
     }
     function addElement(_parent, _content) {
@@ -223,10 +221,10 @@ var A06_Einkaufsliste_DatabaseServer;
         let responseText = await response1.text();
         console.log(responseText);
         if (responseText.includes("success")) {
-            alert("Item edited!");
+            alert("Item editiert");
         }
         else {
-            alert("Error! Try again!");
+            alert("Fehler");
         }
     }
     async function deleteItem(_event) {
@@ -251,10 +249,10 @@ var A06_Einkaufsliste_DatabaseServer;
         let response1 = await fetch(url + "?" + query.toString());
         let responseText = await response1.text();
         if (responseText.includes("success")) {
-            alert("Item deleted!");
+            alert("Item gelöscht");
         }
         else {
-            alert("Error! Try again!");
+            alert("Fehler");
         }
     }
 })(A06_Einkaufsliste_DatabaseServer || (A06_Einkaufsliste_DatabaseServer = {}));
