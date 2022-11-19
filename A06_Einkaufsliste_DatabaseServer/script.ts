@@ -8,10 +8,13 @@ Quellen: Yannik König, Jonas Atzenhofer
 
 namespace A06_Einkaufsliste_DatabaseServer {
 
+    let url: string = "https://webuser.hs-furtwangen.de/~schindlr/Database/index.php/"; 
+
     let date: Date = new Date();
     let dateWithoutTime: string = date.getDate() + "." + (date.getMonth() + 1) + "." + date.getFullYear();
 
     let itemNumber: number = 0;
+    //let elementCounter: number = 0; wird für Bought benötigt
 
     window.addEventListener("load", handleLoad);
 
@@ -25,27 +28,35 @@ namespace A06_Einkaufsliste_DatabaseServer {
     }
 
     interface Data {
-        [1]: ItemAdded[];
+        [id: number]: ItemAdded[];
+    }
+
+    interface ReturnedJSON {
+        status: string;
+        data: Data; 
     }
 
     async function handleLoad(_event: Event): Promise<void> {
         let addButton: HTMLButtonElement = document.querySelector("button#add");
         addButton.addEventListener("click", itemAdd);
 
-        let response: Response = await fetch("https://robert99s.github.io/EIA2-WiSe22/A05_EinkaufslisteClient/data.json");
+        let response: Response = await fetch(url + "?command=find&collection=dataList");
         let item: string = await response.text();
-        let data: Data = JSON.parse(item);
+        let data: ReturnedJSON = JSON.parse(item);
 
         generateExistingItem(data);
     }
 
-    function generateExistingItem(_data: Data): void {
-        let values: ItemAdded[] = _data[1];
-        console.log(values[0].newItem);
+    function generateExistingItem(_data: ReturnedJSON): void {
+        let keys: string[] = Object.keys(_data.data);
+        for (let index: number = 0; index < keys.length; index++) {
 
-        let newItem: string = values[0].newItem;
-        let amount: number = values[0].amount;
-        let comment: string = values[0].comment;
+        let item: string[] = _data.data[keys[index]];  
+        let text: string[] = Object.values(item); 
+
+        let newItem: string = text[0];
+        let amount: number = parseInt(text[1]);
+        let comment: string = text[2];
         let list: HTMLElement = document.getElementById("list");
         let newDiv: HTMLDivElement = document.createElement("div");
         let newInput: HTMLInputElement = document.createElement("input");
@@ -56,8 +67,6 @@ namespace A06_Einkaufsliste_DatabaseServer {
         createDiv(newDiv); 
 
         createItemDiv(divItemData, newDiv); 
-
-        addElement(divItemData);
 
         addElement(divItemData, newItem.toString());
 
@@ -72,6 +81,8 @@ namespace A06_Einkaufsliste_DatabaseServer {
         addButton(newDiv, "delete"); 
 
         list.appendChild(newDiv);
+        itemNumber++;
+        }
     }
         
     async function itemAdd(): Promise<void> {
@@ -83,36 +94,57 @@ namespace A06_Einkaufsliste_DatabaseServer {
         let newDiv: HTMLDivElement = document.createElement("div");
         let newInput: HTMLInputElement = document.createElement("input");
         let divItemData: HTMLDivElement = document.createElement("div");
-        let bought: boolean = false;
         itemNumber++;
  
 
-        createInput(newInput, newDiv);
+        createInput(newInput, newDiv); 
 
-        createDiv(newDiv);
+        createDiv(newDiv); 
 
-        createItemDiv(divItemData, newDiv);
-
-        addElement(divItemData);
+        createItemDiv(divItemData, newDiv); 
 
         addElement(divItemData, newItem.toString());
 
         addElement(divItemData, amount.toString());
 
-        addElement(divItemData, comment.toString());
+        addElement(divItemData, comment.toString()); 
 
-        addElement(divItemData, dateWithoutTime);
+        addElement(divItemData, dateWithoutTime); 
 
-        addButton(newDiv, "edit");
+        addButton(newDiv, "edit"); 
 
-        addButton(newDiv, "delete");
+        addButton(newDiv, "delete"); 
 
         list.appendChild(newDiv);
 
-        let query: URLSearchParams = new URLSearchParams(<any>formData);
-        await fetch("index.html" + "?" + query.toString());
-        console.log(query.toString());
-        alert ("Item is added to the list");
+        sendData(formData); 
+    }
+
+    async function sendData(_formData: FormData): Promise<void> {
+
+        interface FormDataJSON {
+            [key: string]: FormDataEntryValue | FormDataEntryValue[];
+          }
+        let json: FormDataJSON = {};
+        for (let key of _formData.keys())
+            if (!json[key]) {
+              let values: FormDataEntryValue[] = _formData.getAll(key);
+              json[key] = values.length > 1 ? values : values[0];
+            } 
+
+        let query: URLSearchParams = new URLSearchParams(); 
+        query.set("command", "insert");
+        query.set("collection", "dataList");
+        query.set("data", JSON.stringify(json));
+        let response: Response = await fetch(url + "?" + query.toString());
+        let responseText: string = await response.text();
+        console.log();
+        if (responseText.includes("success")) {
+            alert("Item added!"); 
+        }
+        else {
+            alert("Error! Try again!");
+            }
     }
 
     function addElement(_parent: HTMLElement, _content?: string): void {
@@ -170,17 +202,156 @@ namespace A06_Einkaufsliste_DatabaseServer {
 
     function editItem(_event: Event): void {
         let trigger: string = (_event.target as HTMLButtonElement).id;
-        let triggerNumber: string =  trigger.replace(/\D/g, "");
+        let triggerNum: string = trigger.replace(/\D/g, "");
         console.log("editieren");
+        
+        let identifier: number = parseInt(triggerNum);
+        let values: string[] = []; 
+
+        let buttonEdit: HTMLElement = document.getElementById("edit" + identifier);
+        let listEdit: HTMLElement = document.getElementById("ItemData" + identifier);  
+
+        buttonEdit.removeEventListener("click", editItem);
+        buttonEdit.addEventListener("click", saveChanges);
+        buttonEdit.innerHTML = "save";
+        
+
+        for (let index: number = 0; index < 4; index++) {
+            let item: HTMLElement = listEdit.querySelector("p"); 
+            let value: string = item.innerHTML; 
+            values.push(value); 
+            listEdit.removeChild(item); 
+        }
+        createEditInputs(listEdit, values);
     }
 
-    function deleteItem(_event: Event): void {
+    function createEditInputs(_listEdit: HTMLElement, _values: string[]): void {
+        _listEdit.setAttribute("class", "editfield");
+        _listEdit.removeAttribute("border-style"); 
+        let form: HTMLElement = document.createElement("form");
+        _listEdit.appendChild(form); 
+        let formData: FormData = new FormData; 
+        let inputField0: HTMLElement = document.createElement("input");
+        inputField0.setAttribute("type", "text"); 
+        inputField0.setAttribute("name", "item");
+        inputField0.setAttribute("value", _values[0]); 
+        form.appendChild(inputField0);
+
+        let inputField1: HTMLElement = document.createElement("input");
+        inputField1.setAttribute("type", "number"); 
+        inputField1.setAttribute("name", "amount");
+        inputField1.setAttribute("value", _values[1]); 
+        form.appendChild(inputField1);
+
+        let inputField2: HTMLElement = document.createElement("input");
+        inputField2.setAttribute("name", "comment");
+        inputField2.setAttribute("value", _values[2]); 
+        form.appendChild(inputField2);
+        
+        let inputField3: HTMLElement = document.createElement("input");
+        inputField3.setAttribute("type", "text"); 
+        inputField3.setAttribute("name", "date");
+        inputField3.setAttribute("value", _values[3]); 
+        form.appendChild(inputField3);        
+    }
+
+    async function saveChanges(_event: Event): Promise<void> {
         let trigger: string = (_event.target as HTMLButtonElement).id;
         let triggerNum: string = trigger.replace(/\D/g, "");
-        let identifier: number = parseInt(triggerNum); 
+        let identifier: number = parseInt(triggerNum);
+
+        let buttonEdit: HTMLElement = document.getElementById("edit" + identifier);
+
+        let listEdit: HTMLElement = document.getElementById("ItemData" + identifier);     
+        let formData: FormData = new FormData(listEdit.querySelector("form")); 
+        let form: HTMLElement = listEdit.querySelector("form"); 
+
+        let item: FormDataEntryValue = formData.get("item");
+        let amount: FormDataEntryValue = formData.get("amount");
+        let comment: FormDataEntryValue = formData.get("comment"); 
+        let date: FormDataEntryValue = formData.get("date"); 
+        listEdit.removeChild(form); 
+        listEdit.removeAttribute("class");
+        listEdit.setAttribute("class", "ItemData");  
+
+        buttonEdit.removeEventListener( "click", saveChanges);
+        buttonEdit.addEventListener("click", editItem);
+        buttonEdit.innerHTML = "edit";
+       
+        
+        addElement(listEdit, item.toString());
+
+        addElement(listEdit, amount.toString());
+
+        addElement(listEdit, comment.toString()); 
+
+        addElement(listEdit, date.toString()); 
+
+        interface FormDataJSON {
+            [key: string]: FormDataEntryValue | FormDataEntryValue[];
+          }
+        let json: FormDataJSON = {};
+        for (let key of formData.keys())
+            if (!json[key]) {
+              let values: FormDataEntryValue[] = formData.getAll(key);
+              json[key] = values.length > 1 ? values : values[0];
+            } 
+
+        let response0: Response = await fetch(url + "?command=find&collection=dataList"); 
+        let itemResponse: string = await response0.text();
+        let data: ReturnedJSON = JSON.parse(itemResponse);
+
+        let keys: string[] = Object.keys(data.data);
+        let id: string = keys[identifier];
+
+        let query: URLSearchParams = new URLSearchParams(); 
+        query.set("command", "update");
+        query.set("collection", "dataList");
+        query.set("id", id); 
+        query.set("data", JSON.stringify(json)); 
+        let response1: Response = await fetch(url + "?" + query.toString());
+        let responseText: string = await response1.text();
+        console.log(responseText); 
+
+        if (responseText.includes("success")) {
+            alert("Item edited!"); 
+        }
+        else {
+            alert("Error! Try again!");
+                }
+    }
+    
+    async function deleteItem(_event: Event): Promise<void>  {
+        let trigger: string = (_event.target as HTMLButtonElement).id; 
+        let triggerNum: string = trigger.replace(/\D/g, "");
+        console.log("Item gelöscht");
+        
+        let identifier: number = parseInt(triggerNum);
 
         let list: HTMLElement = document.getElementById("list");
         let remIt: HTMLElement = document.getElementById("lister" + identifier);
-        list.removeChild(remIt); 
+        list.removeChild(remIt);
+
+        let response0: Response = await fetch(url + "?command=find&collection=dataList"); 
+        let item: string = await response0.text();
+        let data: ReturnedJSON = JSON.parse(item);
+
+        let keys: string[] = Object.keys(data.data);
+        console.log(keys); 
+        console.log(identifier); 
+        let id: string = keys[identifier];
+        let query: URLSearchParams = new URLSearchParams(); 
+        query.set("command", "delete");
+        query.set("collection", "dataList");
+        query.set("id", id); 
+        let response1: Response = await fetch(url + "?" + query.toString());
+        let responseText: string = await response1.text();
+
+        if (responseText.includes("success")) {
+            alert("Item deleted!"); 
+        }
+        else {
+            alert("Error! Try again!");
+                }
     }
 }
