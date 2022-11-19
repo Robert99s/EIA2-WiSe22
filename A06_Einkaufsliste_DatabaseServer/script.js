@@ -3,7 +3,7 @@ A05 Einkaufsliste_DatabaseServer
 Robert Schindler MKB
 Matrikel: 271342
 Datum: 10.11.2022
-Quellen: Yannik König, Jonas Atzenhofer
+Quellen: von Yannik König inspiriert, Gemeinsam mit Jonas Atzenhofer und Henning Pils erarbeitet
 */
 var A06_Einkaufsliste_DatabaseServer;
 (function (A06_Einkaufsliste_DatabaseServer) {
