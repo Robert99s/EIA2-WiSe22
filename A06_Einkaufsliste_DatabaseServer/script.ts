@@ -18,12 +18,11 @@ namespace A06_Einkaufsliste_DatabaseServer {
     window.addEventListener("load", handleLoad);
 
     interface ItemAdded {
-        bought: boolean;
         newItem: string;
         amount: number;
-        comment: string;
+        comment: string; 
         date: string;
-
+        bought: boolean; 
     }
 
     interface Data {
@@ -192,12 +191,37 @@ namespace A06_Einkaufsliste_DatabaseServer {
         _element.setAttribute("id", "ItemData" + itemNumber);
     }
 
-    function itemBought(_event: Event): void {
+    async function itemBought(_event: Event): Promise<void> {
         let trigger: string = (_event.target as HTMLInputElement).id;
         let triggerNum: string =  trigger.replace(/\D/g, "");
         let identifier: number = parseInt(triggerNum);
-        console.log("gekauft");    
+
+        let response0: Response = await fetch(url + "?command=find&collection=dataList"); 
+        let itemResponse: string = await response0.text();
+        let data: ReturnedJSON = JSON.parse(itemResponse);
+
+        let keys: string[] = Object.keys(data.data);
+
+        let id: string = keys[identifier];
+
+        let query: URLSearchParams = new URLSearchParams(); 
+        query.set("command", "update");
+        query.set("collection", "dataList");
+        query.set("id", id); 
+        query.set("data", "{'bought': true}"); 
+        let response1: Response = await fetch(url + "?" + query.toString());
+        let responseText: string = await response1.text();
+        console.log(responseText); 
+
+        if (responseText.includes("success")) {
+            alert("Item marked as bought!"); 
+        }
+        else {
+            alert("Error! Try again!");
+                } 
+        
     }
+
 
     function editItem(_event: Event): void {
         let trigger: string = (_event.target as HTMLButtonElement).id;
@@ -228,8 +252,7 @@ namespace A06_Einkaufsliste_DatabaseServer {
         _listEdit.setAttribute("class", "editfield");
         _listEdit.removeAttribute("border-style"); 
         let form: HTMLElement = document.createElement("form");
-        _listEdit.appendChild(form); 
-        let formData: FormData = new FormData; 
+        _listEdit.appendChild(form);  
         let inputField0: HTMLElement = document.createElement("input");
         inputField0.setAttribute("type", "text"); 
         inputField0.setAttribute("name", "item");

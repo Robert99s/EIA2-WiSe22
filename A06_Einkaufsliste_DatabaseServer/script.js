@@ -128,11 +128,29 @@ var A06_Einkaufsliste_DatabaseServer;
         _element.setAttribute("class", "ItemData");
         _element.setAttribute("id", "ItemData" + itemNumber);
     }
-    function itemBought(_event) {
+    async function itemBought(_event) {
         let trigger = _event.target.id;
         let triggerNum = trigger.replace(/\D/g, "");
         let identifier = parseInt(triggerNum);
-        console.log("gekauft");
+        let response0 = await fetch(url + "?command=find&collection=dataList");
+        let itemResponse = await response0.text();
+        let data = JSON.parse(itemResponse);
+        let keys = Object.keys(data.data);
+        let id = keys[identifier];
+        let query = new URLSearchParams();
+        query.set("command", "update");
+        query.set("collection", "dataList");
+        query.set("id", id);
+        query.set("data", "{'bought': true}");
+        let response1 = await fetch(url + "?" + query.toString());
+        let responseText = await response1.text();
+        console.log(responseText);
+        if (responseText.includes("success")) {
+            alert("Item marked as bought!");
+        }
+        else {
+            alert("Error! Try again!");
+        }
     }
     function editItem(_event) {
         let trigger = _event.target.id;
@@ -158,7 +176,6 @@ var A06_Einkaufsliste_DatabaseServer;
         _listEdit.removeAttribute("border-style");
         let form = document.createElement("form");
         _listEdit.appendChild(form);
-        let formData = new FormData;
         let inputField0 = document.createElement("input");
         inputField0.setAttribute("type", "text");
         inputField0.setAttribute("name", "item");
