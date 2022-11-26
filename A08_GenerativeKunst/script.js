@@ -25,7 +25,7 @@ var A08_GenerativeKunst;
         crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
         //generiere random Kreise
         crc2.beginPath();
-        for (let i = 25; i > 0; i--) {
+        for (let i = 33; i > 0; i--) {
             let x = Math.random() * crc2.canvas.width;
             let y = Math.random() * crc2.canvas.height;
             let radius = Math.random() * 100;
@@ -36,7 +36,7 @@ var A08_GenerativeKunst;
         }
         //generiere random Dreiecke
         crc2.beginPath();
-        for (let i = 25; i > 0; i--) {
+        for (let i = 33; i > 0; i--) {
             let startX = Math.random() * crc2.canvas.width;
             let startY = Math.random() * crc2.canvas.height;
             let firstX = Math.random() * crc2.canvas.width;
@@ -51,12 +51,12 @@ var A08_GenerativeKunst;
         }
         // generiere random Rechtecke
         crc2.beginPath();
-        for (let i = 25; i > 0; i--) {
+        for (let i = 33; i > 0; i--) {
             let x = Math.random() * crc2.canvas.width;
             let y = Math.random() * crc2.canvas.height;
             let width = Math.random() * 300;
             let height = Math.random() * 300;
-            let color = "hsl(" + Math.random() * 360 + ", 100%, 75%)";
+            let color = "hsl(" + Math.random() * 360 + ", 100%, 50%)";
             crc2.fillStyle = color;
             crc2.fillRect(x, y, width, height);
             crc2.closePath();
@@ -71,15 +71,6 @@ var A08_GenerativeKunst;
         let pattern = document.createElement("canvas").getContext("2d");
         pattern.canvas.width = 220;
         pattern.canvas.height = 440;
-        for (let i = 25; i > 0; i--) {
-            let x = Math.random() * canvas.width;
-            let y = Math.random() * canvas.height;
-            let width = Math.random() * 100;
-            let height = Math.random() * 100;
-            let color = "hsl(" + Math.random() * 360 + ", 100%, 50%)";
-            crc2.fillStyle = color;
-            crc2.fillRect(x, y, width, height);
-        }
     }
 })(A08_GenerativeKunst || (A08_GenerativeKunst = {}));
 //# sourceMappingURL=script.js.map

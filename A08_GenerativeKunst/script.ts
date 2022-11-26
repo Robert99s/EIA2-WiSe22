@@ -32,7 +32,7 @@ namespace A08_GenerativeKunst {
 
         //generiere random Kreise
         crc2.beginPath();
-        for (let i: number = 25; i > 0; i--) {
+        for (let i: number = 33; i > 0; i--) {
         let x: number = Math.random() * crc2.canvas.width;
         let y: number = Math.random() * crc2.canvas.height;
         let radius: number = Math.random() * 100;
@@ -44,7 +44,7 @@ namespace A08_GenerativeKunst {
 
         //generiere random Dreiecke
         crc2.beginPath();
-        for (let i: number = 25; i > 0; i--) {
+        for (let i: number = 33; i > 0; i--) {
         let startX: number = Math.random() * crc2.canvas.width;
         let startY: number = Math.random()  * crc2.canvas.height;
         let firstX: number = Math.random() * crc2.canvas.width;
@@ -60,12 +60,12 @@ namespace A08_GenerativeKunst {
  
          // generiere random Rechtecke
         crc2.beginPath();
-        for (let i: number = 25; i > 0; i--) {
+        for (let i: number = 33; i > 0; i--) {
          let x: number = Math.random() * crc2.canvas.width;
          let y: number = Math.random() * crc2.canvas.height;
          let width: number = Math.random() * 300;
          let height: number = Math.random() * 300;
-         let color: string = "hsl(" + Math.random() * 360 + ", 100%, 75%)";
+         let color: string = "hsl(" + Math.random() * 360 + ", 100%, 50%)";
          crc2.fillStyle = color;
          crc2.fillRect(x, y, width, height);
          crc2.closePath();
@@ -82,15 +82,5 @@ namespace A08_GenerativeKunst {
         let pattern: CanvasRenderingContext2D = document.createElement("canvas").getContext("2d");
         pattern.canvas.width = 220;
         pattern.canvas.height = 440;
-
-        for (let i: number = 25; i > 0; i--) {
-            let x: number = Math.random() * canvas.width;
-            let y: number = Math.random() * canvas.height;
-            let width: number = Math.random() * 100;
-            let height: number = Math.random() * 100;
-            let color: string = "hsl(" + Math.random() * 360 + ", 100%, 50%)";
-            crc2.fillStyle = color;
-            crc2.fillRect(x, y, width, height);
-        }
     }
 }
