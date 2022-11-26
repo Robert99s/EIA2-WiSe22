@@ -1,5 +1,5 @@
 /*
-A05 Einkaufsliste_DatabaseServer
+A06 Einkaufsliste_DatabaseServer
 Robert Schindler MKB
 Matrikel: 271342
 Datum: 10.11.2022
