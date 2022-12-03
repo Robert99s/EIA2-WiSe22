@@ -85,4 +85,50 @@ function handleLoad(_event: Event): void {
     crc2.fillStyle = crc2.createPattern(pattern.canvas, "repeat");
     crc2.fillRect(0, 0, canvas.width, canvas.height);
     */
+
+    /*
+     // Flow der Berge von links oder rechts ausgehend
+            function randomNumber(max: number): number {
+                return Math.floor(Math.random() * max);
+            }
+            console.log(randomNumber(2));
+            //von links nach rechts
+            if (randomNumber(2) == 0) {
+            console.log("Es ist 0");
+            crc2.moveTo(0, 0);
+            crc2.lineTo(0, -_max);
+
+            do {
+                x += stepMin + Math.random() * (stepMax - stepMin);
+                let y: number = -_min - Math.random() * (_max - _min);
+        
+                crc2.lineTo(x, y);
+            } 
+            while (x < crc2.canvas.width);
+        
+            crc2.lineTo(x, 0);
+            crc2.closePath();
+            }
+            // von rechts nach links
+            else {
+            console.log("Es ist 1");
+            crc2.moveTo(0, y);
+            crc2.lineTo(0, -_max);
+
+            do {
+                x += stepMin + Math.random() * (stepMax - stepMin);
+                let y: number = -_min - Math.random() * (_max - _min);
+        
+                crc2.lineTo(x, y);
+            } 
+            while (x < crc2.canvas.width);
+        
+            crc2.lineTo(x, 0);
+            crc2.closePath();
+            }
+        
+            crc2.fillStyle = "grey";
+            crc2.fill();
+            crc2.restore();
+            */
 }   
