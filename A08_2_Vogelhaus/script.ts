@@ -243,9 +243,10 @@ namespace A082_Vogelhaus {
             }
 
         //fliegende Vögel
+        //nachträglich Schleife von 10 auf 19 geändert, da sonst Anforderung mit 20 Vögeln nicht erfüllt war
         function drawFlyingBirds(): void {
         
-                for (let index: number = 0; index < 10; index++) {
+                for (let index: number = 0; index < 19; index++) {
                     let xRandomValue: number = Math.floor(Math.random() * (300 - 30));
                     let yRandomValue: number = Math.floor(Math.random() * (250 - 25));
                     let randomScale: number = Math.floor(Math.random() * (3));
