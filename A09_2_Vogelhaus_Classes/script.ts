@@ -3,7 +3,7 @@ A082_Vogelhaus
 Robert Schindler MKB
 Matrikel: 271342
 Datum: 15.12.2022
-Quellen: L09 und Internet-Recherche
+Quellen: L09, Internet-Recherche, Henning Pils
 */
 
 namespace A09_2_Vogelhaus_Classes {
