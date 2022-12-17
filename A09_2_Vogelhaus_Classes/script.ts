@@ -6,9 +6,19 @@ Datum: 15.12.2022
 Quellen: L09 und Internet-Recherche
 */
 
-namespace A082_Vogelhaus {
+namespace A09_2_Vogelhaus_Classes {
 
     window.addEventListener("load", handleLoad);
+
+    export let crc2: CanvasRenderingContext2D;
+    
+    let snowflakes: Snowflake[] = [];
+    console.log(snowflakes);
+    
+    let flyingBirds: FlyingBirds[] = [];
+    //let pickingBirds: PickingBirds[] = [];
+
+    let imgData: ImageData;
 
     interface Vector {
         x: number;
@@ -17,9 +27,14 @@ namespace A082_Vogelhaus {
 
     function handleLoad(): void {
 
+        let canvas: HTMLCanvasElement | null = document.querySelector("canvas");
+        if (!canvas)
+            return;
+        crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
+
         // Canvas-Element deklarieren
-        let canvas: HTMLCanvasElement = document.querySelector("canvas");
-        let crc2: CanvasRenderingContext2D = canvas.getContext("2d");
+        // let canvas: HTMLCanvasElement = document.querySelector("canvas");
+        // let crc2: CanvasRenderingContext2D = canvas.getContext("2d");
 
         // Canvas Hintergrundfarbe und Startpunkte festlegen
         crc2.fillStyle = "#6CABDD";
@@ -39,10 +54,14 @@ namespace A082_Vogelhaus {
         drawFlyingBirds();
         drawHouseBird({x: 334, y: 666});
         drawPickingBirds();
-        drawSnowflakes({ x: 0, y: 0 }, {x: 0, y: 0});
+        drawSnowflakes(/*{ x: 0, y: 0 }, {x: 0, y: 0}*/);
+        imgData  = crc2.getImageData (0, 0, canvas.width, canvas.height);
+        setInterval(update, 10);
 
         //Hintergrund-Atmosphäre
         function drawBackground(): void {
+
+            crc2.save();
     
             let gradient: CanvasGradient = crc2.createLinearGradient(0, 0, 0, crc2.canvas.height);
             gradient.addColorStop(0, "lightblue");
@@ -51,6 +70,8 @@ namespace A082_Vogelhaus {
     
             crc2.fillStyle = gradient;
             crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
+
+            crc2.restore();
         }
 
         //Sonne
@@ -137,6 +158,8 @@ namespace A082_Vogelhaus {
         //Wolke
         function drawCloud(_position: Vector, _size: Vector): void {
 
+            crc2.save();
+
             let nParticles: number = 20;
             let radiusParticle: number = 50;
             let particle: Path2D = new Path2D();
@@ -146,7 +169,7 @@ namespace A082_Vogelhaus {
             gradient.addColorStop(0, "HSLA(0, 100%, 100%, 0.5)");
             gradient.addColorStop(1, "HSLA(0, 100%, 100%, 0)");
 
-            crc2.save();
+            //crc2.save();
             crc2.translate(_position.x, _position.y);
             crc2.fillStyle = gradient;
 
@@ -188,9 +211,49 @@ namespace A082_Vogelhaus {
             crc2.fill();
             crc2.restore();
             }
+
+            //Wald
+        function drawTrees(_position: Vector): void {
+        
+            for (let index: number = 0; index < 10; index++) {
+                let xRandomValue: number = Math.floor(Math.random() * (335 - 5));
+                let yRandomValue: number = Math.floor(Math.random() * (150 - 50) + 320);
+                let randomScale: number = Math.floor(Math.random() * (3 - 1) + 1);
+    
+                crc2.save();
+                crc2.beginPath();
+                crc2.translate(xRandomValue, yRandomValue);
+                crc2.scale(randomScale, randomScale);
+                crc2.moveTo(20, 0);
+                crc2.lineTo(-20, 0);
+                crc2.lineTo(0, -30);
+                crc2.moveTo(15, -20);
+                crc2.lineTo(-15, -20);
+                crc2.lineTo(0, -50);
+                crc2.moveTo(10, -40);
+                crc2.lineTo(-10, -40);
+                crc2.lineTo(0, -60);
+                crc2.fillStyle = "#26592F";
+                crc2.fill();
+                crc2.closePath();
+                crc2.restore();
+    
+                crc2.save();
+                crc2.beginPath();
+                crc2.translate(xRandomValue, yRandomValue);
+                crc2.moveTo(4, 0);
+                crc2.lineTo(-4, 0);
+                crc2.lineTo(-6, 20);
+                crc2.lineTo(6, 20);
+                crc2.fillStyle = "#5B3A29";
+                crc2.fill();
+                crc2.closePath();
+                crc2.restore();
+            }
+        }
             
         //Schneeflocken
-        function drawSnowflakes(_position: Vector, _size: Vector): void {
+        /*function drawSnowflakes(_position: Vector, _size: Vector): void {
                 
                 for (let i: number = 0; i < 60; i++) {
                     let x: number = Math.random() * 200;
@@ -201,70 +264,51 @@ namespace A082_Vogelhaus {
                     crc2.fillStyle = "white";
                     crc2.fill();
                 }
-            }
+            }*/
 
-        //Wald
-        function drawTrees(_position: Vector): void {
+        function drawSnowflakes(): void {
         
-                for (let index: number = 0; index < 10; index++) {
-                    let xRandomValue: number = Math.floor(Math.random() * (335 - 5));
-                    let yRandomValue: number = Math.floor(Math.random() * (150 - 50) + 320);
-                    let randomScale: number = Math.floor(Math.random() * (3 - 1) + 1);
-        
-                    crc2.save();
-                    crc2.beginPath();
-                    crc2.translate(xRandomValue, yRandomValue);
-                    crc2.scale(randomScale, randomScale);
-                    crc2.moveTo(20, 0);
-                    crc2.lineTo(-20, 0);
-                    crc2.lineTo(0, -30);
-                    crc2.moveTo(15, -20);
-                    crc2.lineTo(-15, -20);
-                    crc2.lineTo(0, -50);
-                    crc2.moveTo(10, -40);
-                    crc2.lineTo(-10, -40);
-                    crc2.lineTo(0, -60);
-                    crc2.fillStyle = "#26592F";
-                    crc2.fill();
-                    crc2.closePath();
-                    crc2.restore();
-        
-                    crc2.save();
-                    crc2.beginPath();
-                    crc2.translate(xRandomValue, yRandomValue);
-                    crc2.moveTo(4, 0);
-                    crc2.lineTo(-4, 0);
-                    crc2.lineTo(-6, 20);
-                    crc2.lineTo(6, 20);
-                    crc2.fillStyle = "#5B3A29";
-                    crc2.fill();
-                    crc2.closePath();
+                //window.setInterval (update,200);
+                for (let index: number = 0; index < 60; index++) {
+                    let snowflake: Snowflake = new Snowflake(Math.random() * 20);
+             
+                    snowflakes.push(snowflake);
                     crc2.restore();
                 }
+                console.log(snowflakes);
             }
 
         //fliegende Vögel
         //nachträglich Schleife von 10 auf 19 geändert, da sonst Anforderung mit 20 Vögeln nicht erfüllt war
+        // function drawFlyingBirds(): void {
+        
+        //         for (let index: number = 0; index < 18; index++) {
+        //             let xRandomValue: number = Math.floor(Math.random() * (300 - 30));
+        //             let yRandomValue: number = Math.floor(Math.random() * (250 - 25));
+        //             let randomScale: number = Math.floor(Math.random() * (3));
+        
+        //             crc2.save();
+        //             crc2.beginPath();
+        //             crc2.translate(xRandomValue, yRandomValue);
+        //             crc2.scale(randomScale, randomScale);
+        //             crc2.moveTo(0, 0);
+        //             crc2.bezierCurveTo(6, 6, 12, -12, 24, -3);
+        //             crc2.moveTo(0, 0);
+        //             crc2.bezierCurveTo(-6, -6, -12, -12, -24, -3);
+        //             crc2.stroke();
+        //             crc2.closePath();
+        //             crc2.restore();
+        //         }
+        //     }
+
         function drawFlyingBirds(): void {
-        
-                for (let index: number = 0; index < 18; index++) {
-                    let xRandomValue: number = Math.floor(Math.random() * (300 - 30));
-                    let yRandomValue: number = Math.floor(Math.random() * (250 - 25));
-                    let randomScale: number = Math.floor(Math.random() * (3));
-        
-                    crc2.save();
-                    crc2.beginPath();
-                    crc2.translate(xRandomValue, yRandomValue);
-                    crc2.scale(randomScale, randomScale);
-                    crc2.moveTo(0, 0);
-                    crc2.bezierCurveTo(6, 6, 12, -12, 24, -3);
-                    crc2.moveTo(0, 0);
-                    crc2.bezierCurveTo(-6, -6, -12, -12, -24, -3);
-                    crc2.stroke();
-                    crc2.closePath();
-                    crc2.restore();
+                    
+                for (let index: number = 0; index < 20; index++) {
+                        let bird1: FlyingBirds = new FlyingBirds();
+            
+                        flyingBirds.push(bird1);
+                    }
                 }
-            }
 
         //pickende Vögel
         function drawPickingBirds(): void {
@@ -281,7 +325,7 @@ namespace A082_Vogelhaus {
                 crc2.scale(randomScale, randomScale);
                 crc2.fillStyle = "#5ea3b3";
                 crc2.beginPath();
-                crc2.arc(60, 135, 12, 0, 2 * Math.PI);
+                crc2.arc(60, 145, 12, 0, 2 * Math.PI);
                 crc2.fill();
                 crc2.beginPath();
                 crc2.arc(75, 155, 16, 0, 2 * Math.PI);
@@ -290,9 +334,9 @@ namespace A082_Vogelhaus {
                 //Schnabel
                 crc2.fillStyle = "black";
                 crc2.beginPath();
-                crc2.moveTo(49, 140);
-                crc2.lineTo(35, 135);
-                crc2.lineTo(49, 130);
+                crc2.moveTo(58, 156);
+                crc2.lineTo(42, 160);
+                crc2.lineTo(49, 142);
                 crc2.fill();
     
                 //Beine
@@ -306,7 +350,7 @@ namespace A082_Vogelhaus {
                 //Auge
                 crc2.fillStyle = "black";
                 crc2.beginPath();
-                crc2.arc(58, 131, 2, 0, 2 * Math.PI);
+                crc2.arc(58, 141, 2, 0, 2 * Math.PI);
                 crc2.fill();
                 
                 crc2.closePath();
@@ -314,6 +358,16 @@ namespace A082_Vogelhaus {
                 crc2.restore();
         }
     }
+
+        //pickende Vögel
+        // function drawPickingBirds(): void {
+                    
+        // for (let index: number = 0; index < 5; index++) {
+        //         let bird1: PickingBirds = new PickingBirds(this.position.x);
+    
+        //         pickingBirds.push(bird1);
+        //     }
+        // }
 
         //Vogel im Haus
         function drawHouseBird(_position: Vector): void {
@@ -361,5 +415,28 @@ namespace A082_Vogelhaus {
 
             crc2.restore();
         }
+
+        function update(): void {
+       
+            crc2.clearRect(0, 0, crc2.canvas.width, crc2.canvas.height);
+            crc2.putImageData(imgData, 0 , 0);
+            crc2.save();
+            for (let i: number = 0; i < snowflakes.length; i++) {
+             snowflakes[i].move(1 / 50);
+             snowflakes[i].draw();
+            }
+            for (let i: number = 0; i < flyingBirds.length; i++) {
+            flyingBirds[i].move(1 / 50);
+            flyingBirds[i].drawFlyingBirds();
+                //console.log(flyingBirds[i].positon);
+            }
+            // for (let i: number = 0; i < pickingBirds.length; i++); {
+            // pickingBirds[i].eat(1 / 50);
+            // pickingBirds[i].drawPickingBirds();
+            // }
+        }
+        console.log(flyingBirds);
+        
+        crc2.restore();
     }
 }
