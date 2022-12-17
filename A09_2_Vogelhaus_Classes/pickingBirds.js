@@ -1,5 +1,8 @@
 /*
 namespace A09_2_Vogelhaus_Classes {
+
+    Habe ich leider nicht hinbekommen, dass es funktioniert, daher grün eingefärbt, dass der Rest funktioniert.
+
     export class PickingBirds {
         position: Vector;
         velocity: Vector;
@@ -38,7 +41,7 @@ namespace A09_2_Vogelhaus_Classes {
                  crc2.beginPath();
                  crc2.moveTo(58, 156);
                  crc2.lineTo(42, 160);
-                 crc2.lineTo(50, 142);
+                 crc2.lineTo(49, 142);
                  crc2.fill();
     
                 //Beine
