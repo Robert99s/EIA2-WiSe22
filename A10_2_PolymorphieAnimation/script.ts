@@ -20,6 +20,8 @@ namespace A10_2_PolymorphieAnimation {
 
     let imgData: ImageData;
 
+    let moveables: Moveable[] = []; 
+
     interface Vector {
         x: number;
         y: number;
@@ -51,12 +53,41 @@ namespace A10_2_PolymorphieAnimation {
         drawMountains(mountains, 160, 70, "grey");
         drawCloud({ x: 100, y: 100 }, {x: 100, y: 50});
         drawTrees({x: 20, y: 400});
-        drawFlyingBirds();
+        //drawFlyingBirds();
         drawHouseBird({x: 334, y: 666});
         drawPickingBirds();
-        drawSnowflakes(/*{ x: 0, y: 0 }, {x: 0, y: 0}*/);
+        //drawSnowflakes(/*{ x: 0, y: 0 }, {x: 0, y: 0}*/);
         imgData  = crc2.getImageData (0, 0, canvas.width, canvas.height);
+        create();
         setInterval(update, 10);
+
+        export function create(): void {
+        
+            for (let index: number = 0; index < 100; index++) {
+                let snowflake: Snowflake = new Snowflake(1); 
+                moveables.push(snowflake); 
+            }
+    
+            for (let index2: number = 0; index2 < 20; index2++) {
+                let bird: FlyingBirds = new FlyingBirds(200);
+                moveables.push(bird);
+            }
+    
+        }
+    
+        export function update(): void {
+            console.log("update");
+            crc2.putImageData(imgData, 0, 0); 
+            // crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
+            for (let snowflake of moveables) {
+                snowflake.move(1 / 50);
+                snowflake.draw();
+            }
+            for (let bird of moveables) {
+                bird.move(1 / 50);
+                bird.draw();
+            }
+        }    
 
         //Hintergrund-Atmosphäre
         function drawBackground(): void {
@@ -266,7 +297,7 @@ namespace A10_2_PolymorphieAnimation {
                 }
             }*/
 
-        function drawSnowflakes(): void {
+        /*function drawSnowflakes(): void {
         
                 //window.setInterval (update,200);
                 for (let index: number = 0; index < 60; index++) {
@@ -276,7 +307,7 @@ namespace A10_2_PolymorphieAnimation {
                     crc2.restore();
                 }
                 console.log(snowflakes);
-            }
+            }*/
 
         //fliegende Vögel
         //nachträglich Schleife von 10 auf 19 geändert, da sonst Anforderung mit 20 Vögeln nicht erfüllt war
@@ -301,14 +332,14 @@ namespace A10_2_PolymorphieAnimation {
         //         }
         //     }
 
-        function drawFlyingBirds(): void {
+        /*function drawFlyingBirds(): void {
                     
                 for (let index: number = 0; index < 20; index++) {
                         let bird1: FlyingBirds = new FlyingBirds();
             
                         flyingBirds.push(bird1);
                     }
-                }
+                }*/
 
         //pickende Vögel
         function drawPickingBirds(): void {
@@ -416,7 +447,7 @@ namespace A10_2_PolymorphieAnimation {
             crc2.restore();
         }
 
-        function update(): void {
+        /*function update(): void {
        
             crc2.clearRect(0, 0, crc2.canvas.width, crc2.canvas.height);
             crc2.putImageData(imgData, 0 , 0);
@@ -429,14 +460,14 @@ namespace A10_2_PolymorphieAnimation {
             flyingBirds[i].move(1 / 50);
             flyingBirds[i].drawFlyingBirds();
                 //console.log(flyingBirds[i].positon);
-            }
+            }*/
             // for (let i: number = 0; i < pickingBirds.length; i++); {
             // pickingBirds[i].eat(1 / 50);
             // pickingBirds[i].drawPickingBirds();
             // }
         }
-        console.log(flyingBirds);
+        //console.log(flyingBirds);
         
-        crc2.restore();
+    crc2.restore();
     }
-}
+//}

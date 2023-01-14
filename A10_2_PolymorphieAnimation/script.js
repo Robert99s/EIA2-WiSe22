@@ -13,6 +13,7 @@ var A10_2_PolymorphieAnimation;
     let flyingBirds = [];
     //let pickingBirds: PickingBirds[] = [];
     let imgData;
+    let moveables = [];
     function handleLoad() {
         let canvas = document.querySelector("canvas");
         if (!canvas)
@@ -34,12 +35,38 @@ var A10_2_PolymorphieAnimation;
         drawMountains(mountains, 160, 70, "grey");
         drawCloud({ x: 100, y: 100 }, { x: 100, y: 50 });
         drawTrees({ x: 20, y: 400 });
-        drawFlyingBirds();
+        //drawFlyingBirds();
         drawHouseBird({ x: 334, y: 666 });
         drawPickingBirds();
-        drawSnowflakes( /*{ x: 0, y: 0 }, {x: 0, y: 0}*/);
+        //drawSnowflakes(/*{ x: 0, y: 0 }, {x: 0, y: 0}*/);
         imgData = A10_2_PolymorphieAnimation.crc2.getImageData(0, 0, canvas.width, canvas.height);
+        create();
         setInterval(update, 10);
+        function create() {
+            for (let index = 0; index < 100; index++) {
+                let snowflake = new A10_2_PolymorphieAnimation.Snowflake(1);
+                moveables.push(snowflake);
+            }
+            for (let index2 = 0; index2 < 20; index2++) {
+                let bird = new A10_2_PolymorphieAnimation.FlyingBirds(200);
+                moveables.push(bird);
+            }
+        }
+        A10_2_PolymorphieAnimation.create = create;
+        function update() {
+            console.log("update");
+            A10_2_PolymorphieAnimation.crc2.putImageData(imgData, 0, 0);
+            // crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
+            for (let snowflake of moveables) {
+                snowflake.move(1 / 50);
+                snowflake.draw();
+            }
+            for (let bird of moveables) {
+                bird.move(1 / 50);
+                bird.draw();
+            }
+        }
+        A10_2_PolymorphieAnimation.update = update;
         //Hintergrund-Atmosphäre
         function drawBackground() {
             A10_2_PolymorphieAnimation.crc2.save();
@@ -218,15 +245,17 @@ var A10_2_PolymorphieAnimation;
                     crc2.fill();
                 }
             }*/
-        function drawSnowflakes() {
-            //window.setInterval (update,200);
-            for (let index = 0; index < 60; index++) {
-                let snowflake = new A10_2_PolymorphieAnimation.Snowflake(Math.random() * 20);
-                snowflakes.push(snowflake);
-                A10_2_PolymorphieAnimation.crc2.restore();
-            }
-            console.log(snowflakes);
-        }
+        /*function drawSnowflakes(): void {
+        
+                //window.setInterval (update,200);
+                for (let index: number = 0; index < 60; index++) {
+                    let snowflake: Snowflake = new Snowflake(Math.random() * 20);
+             
+                    snowflakes.push(snowflake);
+                    crc2.restore();
+                }
+                console.log(snowflakes);
+            }*/
         //fliegende Vögel
         //nachträglich Schleife von 10 auf 19 geändert, da sonst Anforderung mit 20 Vögeln nicht erfüllt war
         // function drawFlyingBirds(): void {
@@ -247,12 +276,14 @@ var A10_2_PolymorphieAnimation;
         //             crc2.restore();
         //         }
         //     }
-        function drawFlyingBirds() {
-            for (let index = 0; index < 20; index++) {
-                let bird1 = new A10_2_PolymorphieAnimation.FlyingBirds();
-                flyingBirds.push(bird1);
-            }
-        }
+        /*function drawFlyingBirds(): void {
+                    
+                for (let index: number = 0; index < 20; index++) {
+                        let bird1: FlyingBirds = new FlyingBirds();
+            
+                        flyingBirds.push(bird1);
+                    }
+                }*/
         //pickende Vögel
         function drawPickingBirds() {
             for (let index = 0; index < 5; index++) {
@@ -340,26 +371,27 @@ var A10_2_PolymorphieAnimation;
             A10_2_PolymorphieAnimation.crc2.closePath();
             A10_2_PolymorphieAnimation.crc2.restore();
         }
-        function update() {
-            A10_2_PolymorphieAnimation.crc2.clearRect(0, 0, A10_2_PolymorphieAnimation.crc2.canvas.width, A10_2_PolymorphieAnimation.crc2.canvas.height);
-            A10_2_PolymorphieAnimation.crc2.putImageData(imgData, 0, 0);
-            A10_2_PolymorphieAnimation.crc2.save();
-            for (let i = 0; i < snowflakes.length; i++) {
-                snowflakes[i].move(1 / 50);
-                snowflakes[i].draw();
+        /*function update(): void {
+       
+            crc2.clearRect(0, 0, crc2.canvas.width, crc2.canvas.height);
+            crc2.putImageData(imgData, 0 , 0);
+            crc2.save();
+            for (let i: number = 0; i < snowflakes.length; i++) {
+             snowflakes[i].move(1 / 50);
+             snowflakes[i].draw();
             }
-            for (let i = 0; i < flyingBirds.length; i++) {
-                flyingBirds[i].move(1 / 50);
-                flyingBirds[i].drawFlyingBirds();
+            for (let i: number = 0; i < flyingBirds.length; i++) {
+            flyingBirds[i].move(1 / 50);
+            flyingBirds[i].drawFlyingBirds();
                 //console.log(flyingBirds[i].positon);
-            }
-            // for (let i: number = 0; i < pickingBirds.length; i++); {
-            // pickingBirds[i].eat(1 / 50);
-            // pickingBirds[i].drawPickingBirds();
-            // }
-        }
-        console.log(flyingBirds);
-        A10_2_PolymorphieAnimation.crc2.restore();
+            }*/
+        // for (let i: number = 0; i < pickingBirds.length; i++); {
+        // pickingBirds[i].eat(1 / 50);
+        // pickingBirds[i].drawPickingBirds();
+        // }
     }
+    //console.log(flyingBirds);
+    A10_2_PolymorphieAnimation.crc2.restore();
 })(A10_2_PolymorphieAnimation || (A10_2_PolymorphieAnimation = {}));
+//}
 //# sourceMappingURL=script.js.map
