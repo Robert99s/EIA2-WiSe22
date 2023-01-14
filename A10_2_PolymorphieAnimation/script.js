@@ -8,12 +8,36 @@ Quellen:
 var A10_2_PolymorphieAnimation;
 (function (A10_2_PolymorphieAnimation) {
     window.addEventListener("load", handleLoad);
-    let snowflakes = [];
-    console.log(snowflakes);
-    let flyingBirds = [];
+    //let snowflakes: Snowflake[] = [];
+    //console.log(snowflakes);
+    //let flyingBirds: FlyingBirds[] = [];
     //let pickingBirds: PickingBirds[] = [];
     let imgData;
     let moveables = [];
+    function create() {
+        for (let index = 0; index < 100; index++) {
+            let snowflakeSize = Math.random() * 10;
+            let snowflake = new A10_2_PolymorphieAnimation.Snowflake(snowflakeSize);
+            moveables.push(snowflake);
+        }
+        for (let index2 = 0; index2 < 20; index2++) {
+            let bird = new A10_2_PolymorphieAnimation.FlyingBirds(0);
+            moveables.push(bird);
+        }
+    }
+    A10_2_PolymorphieAnimation.create = create;
+    function update() {
+        A10_2_PolymorphieAnimation.crc2.putImageData(imgData, 0, 0);
+        for (let snowflake of moveables) {
+            snowflake.move(1 / 50);
+            snowflake.draw();
+        }
+        for (let bird of moveables) {
+            bird.move(1 / 50);
+            bird.draw();
+        }
+    }
+    A10_2_PolymorphieAnimation.update = update;
     function handleLoad() {
         let canvas = document.querySelector("canvas");
         if (!canvas)
@@ -42,31 +66,6 @@ var A10_2_PolymorphieAnimation;
         imgData = A10_2_PolymorphieAnimation.crc2.getImageData(0, 0, canvas.width, canvas.height);
         create();
         setInterval(update, 10);
-        function create() {
-            for (let index = 0; index < 100; index++) {
-                let snowflake = new A10_2_PolymorphieAnimation.Snowflake(1);
-                moveables.push(snowflake);
-            }
-            for (let index2 = 0; index2 < 20; index2++) {
-                let bird = new A10_2_PolymorphieAnimation.FlyingBirds(200);
-                moveables.push(bird);
-            }
-        }
-        A10_2_PolymorphieAnimation.create = create;
-        function update() {
-            console.log("update");
-            A10_2_PolymorphieAnimation.crc2.putImageData(imgData, 0, 0);
-            // crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
-            for (let snowflake of moveables) {
-                snowflake.move(1 / 50);
-                snowflake.draw();
-            }
-            for (let bird of moveables) {
-                bird.move(1 / 50);
-                bird.draw();
-            }
-        }
-        A10_2_PolymorphieAnimation.update = update;
         //Hintergrund-Atmosphäre
         function drawBackground() {
             A10_2_PolymorphieAnimation.crc2.save();
@@ -290,7 +289,7 @@ var A10_2_PolymorphieAnimation;
                 let xRandomValue = Math.floor(Math.random() * (150));
                 let yRandomValue = Math.floor(canvas.height / 2 + Math.random() * (50));
                 let randomScale = Math.floor(Math.random() * (3 - 0.5));
-                console.log(xRandomValue, yRandomValue);
+                //console.log(xRandomValue, yRandomValue);
                 A10_2_PolymorphieAnimation.crc2.save();
                 A10_2_PolymorphieAnimation.crc2.translate(xRandomValue, yRandomValue);
                 A10_2_PolymorphieAnimation.crc2.scale(randomScale, randomScale);
@@ -391,7 +390,7 @@ var A10_2_PolymorphieAnimation;
         // }
     }
     //console.log(flyingBirds);
-    A10_2_PolymorphieAnimation.crc2.restore();
+    //crc2.restore();
 })(A10_2_PolymorphieAnimation || (A10_2_PolymorphieAnimation = {}));
 //}
 //# sourceMappingURL=script.js.map

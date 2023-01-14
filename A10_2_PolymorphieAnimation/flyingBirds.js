@@ -3,13 +3,19 @@ var A10_2_PolymorphieAnimation;
     class FlyingBirds extends A10_2_PolymorphieAnimation.Moveable {
         size;
         constructor(_size, _position) {
-            super(_position);
-            if (_position)
+            if (_position) {
+                super(_position);
                 this.position = _position.copy();
-            else
-                this.position = new A10_2_PolymorphieAnimation.Vector(0, 100);
-            this.velocity = new A10_2_PolymorphieAnimation.Vector(1, 200);
-            this.velocity.random(20, 100);
+            }
+            else {
+                let randomXStartPosition = Math.random() * document.getElementById("canvas").clientWidth;
+                let randomYStartPosition = Math.random() * document.getElementById("canvas").clientHeight;
+                let newPosition = new A10_2_PolymorphieAnimation.Vector(randomXStartPosition, randomYStartPosition / 2);
+                super(newPosition);
+                this.position = newPosition;
+            }
+            let birdsFlyingSpeed = Math.random() * 30 + 30;
+            this.velocity = new A10_2_PolymorphieAnimation.Vector(birdsFlyingSpeed, 1);
             this.size = _size;
         }
         /*positon: Vector;
@@ -24,9 +30,15 @@ var A10_2_PolymorphieAnimation;
             this.velocity.random(20, 100);
         }*/
         move(_timeslice) {
-            if (this.position.y > 667)
-                this.position.y = A10_2_PolymorphieAnimation.crc2.canvas.height;
-            super.move(0.02);
+            if (this.position.y > A10_2_PolymorphieAnimation.crc2.canvas.width || this.position.y < 0) {
+                this.position.y = A10_2_PolymorphieAnimation.crc2.canvas.height * Math.random();
+                if (this.velocity.x > 0)
+                    this.position.x = 0;
+                else
+                    this.position.x = A10_2_PolymorphieAnimation.crc2.canvas.width;
+            }
+            super.move(0.01);
+            //console.log("move");
         }
         /*move(_timeslice: number): void {
             let offset: Vector = new Vector(this.velocity.x, this.velocity.y);
@@ -42,12 +54,12 @@ var A10_2_PolymorphieAnimation;
             if (this.positon.y > crc2.canvas.height)
             this.positon.y -= crc2.canvas.height;
             }*/
-        drawFlyingBirds() {
+        draw() {
             // let xRandomValue: number = Math.floor(Math.random() * (300 - 30));
             // let yRandomValue: number = Math.floor(Math.random() * (250 - 25));
             // let randomScale: number = Math.floor(Math.random() * (3));
             A10_2_PolymorphieAnimation.crc2.save();
-            A10_2_PolymorphieAnimation.crc2.translate(this.position.x, this.position.x);
+            A10_2_PolymorphieAnimation.crc2.translate(this.position.x, this.position.y);
             A10_2_PolymorphieAnimation.crc2.beginPath();
             //crc2.scale(randomScale, randomScale);
             A10_2_PolymorphieAnimation.crc2.moveTo(0, 0);

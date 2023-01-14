@@ -20,9 +20,6 @@ namespace A10_2_PolymorphieAnimation {
         }
 
         move(_timeslice: number): void {
-            let randomNum: number = Math.random() * (800 - 1) + 1;
-            console.log("move");
-    
 
             let offset: Vector = this.velocity.copy();
             offset.scale(_timeslice);

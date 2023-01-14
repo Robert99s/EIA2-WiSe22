@@ -12,20 +12,46 @@ namespace A10_2_PolymorphieAnimation {
 
     export let crc2: CanvasRenderingContext2D;
     
-    let snowflakes: Snowflake[] = [];
-    console.log(snowflakes);
+    //let snowflakes: Snowflake[] = [];
+    //console.log(snowflakes);
     
-    let flyingBirds: FlyingBirds[] = [];
+    //let flyingBirds: FlyingBirds[] = [];
     //let pickingBirds: PickingBirds[] = [];
 
     let imgData: ImageData;
 
-    let moveables: Moveable[] = []; 
+    let moveables: Moveable [] = []; 
 
     interface Vector {
         x: number;
         y: number;
     }
+
+    export function create(): void {
+        
+        for (let index: number = 0; index < 100; index++) {
+            let snowflakeSize: number = Math.random() * 10;
+            let snowflake: Snowflake = new Snowflake(snowflakeSize); 
+            moveables.push(snowflake); 
+        }
+
+        for (let index2: number = 0; index2 < 20; index2++) {
+            let bird: FlyingBirds = new FlyingBirds(0);
+            moveables.push(bird);
+        }
+    }
+
+    export function update(): void {
+        crc2.putImageData(imgData, 0, 0); 
+        for (let snowflake of moveables) {
+            snowflake.move(1 / 50);
+            snowflake.draw();
+        }
+        for (let bird of moveables) {
+            bird.move(1 / 50);
+            bird.draw();
+        }
+    }    
 
     function handleLoad(): void {
 
@@ -60,34 +86,6 @@ namespace A10_2_PolymorphieAnimation {
         imgData  = crc2.getImageData (0, 0, canvas.width, canvas.height);
         create();
         setInterval(update, 10);
-
-        export function create(): void {
-        
-            for (let index: number = 0; index < 100; index++) {
-                let snowflake: Snowflake = new Snowflake(1); 
-                moveables.push(snowflake); 
-            }
-    
-            for (let index2: number = 0; index2 < 20; index2++) {
-                let bird: FlyingBirds = new FlyingBirds(200);
-                moveables.push(bird);
-            }
-    
-        }
-    
-        export function update(): void {
-            console.log("update");
-            crc2.putImageData(imgData, 0, 0); 
-            // crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
-            for (let snowflake of moveables) {
-                snowflake.move(1 / 50);
-                snowflake.draw();
-            }
-            for (let bird of moveables) {
-                bird.move(1 / 50);
-                bird.draw();
-            }
-        }    
 
         //Hintergrund-Atmosphäre
         function drawBackground(): void {
@@ -348,7 +346,7 @@ namespace A10_2_PolymorphieAnimation {
                 let yRandomValue: number = Math.floor(canvas.height / 2 + Math.random() * (50));
                 let randomScale: number = Math.floor(Math.random() * (3 - 0.5));
 
-                console.log(xRandomValue, yRandomValue);
+                //console.log(xRandomValue, yRandomValue);
                 
 
                 crc2.save();
@@ -468,6 +466,6 @@ namespace A10_2_PolymorphieAnimation {
         }
         //console.log(flyingBirds);
         
-    crc2.restore();
+    //crc2.restore();
     }
 //}

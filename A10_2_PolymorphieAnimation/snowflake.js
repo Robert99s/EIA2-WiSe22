@@ -7,12 +7,14 @@ var A10_2_PolymorphieAnimation;
         size;
         constructor(_size, _position) {
             super(_position);
+            let randomXStartPosition = Math.random() * document.getElementById("canvas").clientWidth;
+            let randomYStartPosition = Math.random() * document.getElementById("canvas").clientHeight;
             if (_position)
                 this.position = _position.copy();
             else
-                this.position = new A10_2_PolymorphieAnimation.Vector(0, 0);
-            this.velocity = new A10_2_PolymorphieAnimation.Vector(0, 0);
-            this.velocity.random(0, 100);
+                this.position = new A10_2_PolymorphieAnimation.Vector(randomXStartPosition, randomYStartPosition);
+            this.velocity = new A10_2_PolymorphieAnimation.Vector(1, _size);
+            //this.velocity.random(0, 100);
             this.size = _size;
             /*console.log("ConstructorSnow");
             this.positon = new Vector(0, 0);

@@ -11,13 +11,16 @@ namespace A10_2_PolymorphieAnimation {
         constructor(_size: number, _position?: Vector) {
             super(_position);
 
+            let randomXStartPosition: number = Math.random() * document.getElementById("canvas").clientWidth;
+            let randomYStartPosition: number = Math.random() * document.getElementById("canvas").clientHeight;
             if (_position)
             this.position = _position.copy();
             else
-            this.position = new Vector(0, 0);
+            this.position = new Vector(randomXStartPosition, randomYStartPosition);
 
-            this.velocity = new Vector(0, 0);
-            this.velocity.random(0, 100);
+            this.velocity = new Vector(1, _size);
+            //this.velocity.random(0, 100);
+
             this.size = _size;
             /*console.log("ConstructorSnow");
             this.positon = new Vector(0, 0);
