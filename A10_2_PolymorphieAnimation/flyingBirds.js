@@ -7,9 +7,9 @@ var A10_2_PolymorphieAnimation;
             if (_position)
                 this.position = _position.copy();
             else
-                this.position = new A10_2_PolymorphieAnimation.Vector(0, 0);
-            this.velocity = new A10_2_PolymorphieAnimation.Vector(0, 0);
-            this.velocity.random(50, 200);
+                this.position = new A10_2_PolymorphieAnimation.Vector(0, 100);
+            this.velocity = new A10_2_PolymorphieAnimation.Vector(1, 200);
+            this.velocity.random(20, 100);
             this.size = _size;
         }
         /*positon: Vector;
@@ -23,6 +23,11 @@ var A10_2_PolymorphieAnimation;
             this.velocity = new Vector(1, 200);
             this.velocity.random(20, 100);
         }*/
+        move(_timeslice) {
+            if (this.position.y > 667)
+                this.position.y = A10_2_PolymorphieAnimation.crc2.canvas.height;
+            super.move(0.02);
+        }
         /*move(_timeslice: number): void {
             let offset: Vector = new Vector(this.velocity.x, this.velocity.y);
             offset.scale(_timeslice);
@@ -53,11 +58,6 @@ var A10_2_PolymorphieAnimation;
             A10_2_PolymorphieAnimation.crc2.stroke();
             A10_2_PolymorphieAnimation.crc2.closePath();
             A10_2_PolymorphieAnimation.crc2.restore();
-        }
-        move(_timeslice) {
-            if (this.position.y > 420)
-                this.position.y = A10_2_PolymorphieAnimation.crc2.canvas.height;
-            super.move(0.01);
         }
     }
     A10_2_PolymorphieAnimation.FlyingBirds = FlyingBirds;

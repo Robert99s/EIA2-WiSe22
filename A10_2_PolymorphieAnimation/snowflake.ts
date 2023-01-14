@@ -27,6 +27,10 @@ namespace A10_2_PolymorphieAnimation {
             this.size = _size;*/
             }
 
+        move(_timeslice: number): void {
+                super.move(0.1);
+            }
+
         /*move(_timeslice: number): void {
            
             let offset: Vector = new Vector(this.velocity.x, this.velocity.y);
@@ -54,10 +58,5 @@ namespace A10_2_PolymorphieAnimation {
             crc2.fill();
             crc2.restore();
         }
-
-        move(_timeslice: number): void {
-            super.move(0.09);
-        }
     }
-
 }

@@ -21,6 +21,9 @@ var A10_2_PolymorphieAnimation;
             this.velocity.random(20, 200);
             this.size = _size;*/
         }
+        move(_timeslice) {
+            super.move(0.1);
+        }
         /*move(_timeslice: number): void {
            
             let offset: Vector = new Vector(this.velocity.x, this.velocity.y);
@@ -45,9 +48,6 @@ var A10_2_PolymorphieAnimation;
             A10_2_PolymorphieAnimation.crc2.closePath();
             A10_2_PolymorphieAnimation.crc2.fill();
             A10_2_PolymorphieAnimation.crc2.restore();
-        }
-        move(_timeslice) {
-            super.move(0.09);
         }
     }
     A10_2_PolymorphieAnimation.Snowflake = Snowflake;
