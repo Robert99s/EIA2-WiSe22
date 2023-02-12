@@ -45,7 +45,6 @@ namespace A10_2_PolymorphieAnimation {
             }
             super.move(0.01);
             //console.log("move");
-            
         }
 
         /*move(_timeslice: number): void {
